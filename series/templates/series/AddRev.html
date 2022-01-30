@@ -1,0 +1,91 @@
+{% extends 'series/basic.html'%}
+{%block title%} Add rev {%endblock%}
+{%block css%}
+<style>
+    .container {
+        /* border:2px solid black; */
+        width: 70%;
+    }
+
+    .reld {
+        width: auto;
+    }
+
+    .img {
+        width: auto;
+    }
+    .head{
+        text-align: center;
+    }
+    .success{
+        display: none;
+        margin: auto;
+        width: 70%;
+    }
+</style>
+{%endblock%}
+{%block body%}
+<script>
+    home = document.querySelector(".home");
+    add = document.querySelector(".add");
+    home.classList.remove("active");
+    add.classList.add("active");
+</script>
+
+<h2 class="head my-2">Add review</h2>
+<div class="container">
+<form action="/series/addrev/" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label" >Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label" >Series Name</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="series_name" placeholder="Example:Money Heist" required>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label" >Release date</label>
+            <input class="form-control reld" type="date" name="rel_date" id="formFile" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label" >Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="formFile" class="form-label" >Image</label>
+            <input class="form-control img" type="file" id="formFile" name="img" required> 
+        </div>
+        <div class="mb-3">
+            <label for="customRange2" class="form-label" >Rating</label>
+            <input type="range" class="form-range" min="0" max="10" id="customRange2" name="rating" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit" style="background-color: rgb(233 19 19);border: 2px rgb(233 19 19);">Submit</button>
+</form>
+</div>
+<div class="success my-3" >
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Success!!</h4>
+        <p>Your review has been uploaded successfully.</p>
+        <p class="mb-0">You will be redirected to Home shortly.</p>
+        <div class="spinner-grow my-3" role="status">
+            <span class="visually-hidden ">Loading...</span>
+          </div>
+    </div>
+</div>
+{%endblock%}
+{%block js%}
+<script>
+    // console.log("hello");
+    function redirect() {
+        document.location="/series"
+    }
+    {% if posted %}
+    document.querySelector(".head").style.display='none';
+    document.querySelector(".container").style.display='none';
+    document.querySelector(".success").style.display='block';
+    setTimeout(redirect,1500);
+    {%endif%}
+
+</script>
+{%endblock%}

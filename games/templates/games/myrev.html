@@ -1,0 +1,66 @@
+{% extends 'games/basic.html'%}
+{%block title %} {{games.games_name}} {%endblock%}
+{%block body %}
+<style>
+    .card-body {
+        width: 60%;
+    }
+    .success{
+        display: none;
+        margin: auto;
+        width: 70%;
+    }
+</style>
+
+    <div class="card mb-3" style="align-items: center;">
+        <img src="/media/{{games.game_img}}" class="card-img-top my-3" alt="..." style="width:auto ;max-height: 40rem; max-width: 60%;">
+        <div class="card-body">
+            <h1 class="card-title">{{games.game_name}}</h1>
+            <p class="card-text">{{games.desc}}.</p>
+            <p class="card-text">Release Date: {{games.release_date}}</p>
+            <form action="/games/myrev/{{games.games_id}}" method="post">{% csrf_token %}
+                <input type="hidden" name="game_name" value="{{games.game_name}}">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                    <input type="name" class="form-control" id="exampleInputEmail1" name="name"
+                    aria-describedby="emailHelp" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                    aria-describedby="emailHelp" required>
+                </div>
+                <div class="mb-3">
+                <label for="customRange2" class="form-label">Your Rating</label>
+                <input type="range" class="form-range" min="0" max="10" id="customRange2" name="rating" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #0d9f0d; border:2px #0d9f0d;">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div class="success my-3" >
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Success!!</h4>
+        <p>Your review has been uploaded successfully.</p>
+        <p class="mb-0">You will be redirected to Home shortly.</p>
+        <p>Thank you for your reviews.</p>
+        <div class="spinner-grow my-3" role="status">
+            <span class="visually-hidden ">Loading...</span>
+          </div>
+    </div>
+</div>
+{%endblock%}
+{%block script%}
+<script>
+    function redirect() {
+        document.location="/games"
+    }
+    {% if posted %}
+    document.querySelector(".card").style.display='none';
+    document.querySelector(".success").style.display='block';
+    setTimeout(redirect,1500);
+    {%endif%}
+
+</script>
+{%endblock%}

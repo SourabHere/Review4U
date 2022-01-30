@@ -1,0 +1,333 @@
+{% extends 'basic.html'%}
+{%block title%} Review4U {%endblock%}
+{%block css%}
+
+<style>
+    .container {
+        background-color: #4c4c4c;
+        width: 65%;
+        padding: 0px 0.5% 1% 0.5%;
+    }
+
+    .d-block {
+        height: 42rem;
+    }
+
+    .headings {
+        /* margin-top: 5%; */
+        /* background-color: burlywood; */
+        /* border-radius: 10px; */
+        padding: 1% 0 0% 1%;
+
+    }
+
+    #serieshead {
+        /* background-color: rgb(231, 130, 130); */
+        color: white;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: bolder;
+    }
+
+    #gameshead {
+        /* background-color: orchid; */
+        color: white;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: bolder;
+    }
+
+    #animeshead {
+        /* background-color: rgb(233, 129, 91); */
+        color: white;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: bolder;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    #line1,
+    #line2,
+    #line3 {
+        color: white;
+        margin: 0;
+    }
+
+    .cu1 {
+        margin-top: 5%;
+        border: 1px solid white;
+        background-color: rgb(233 19 19);
+    }
+
+    .cu2 {
+        background-color: orange;
+
+    }
+
+    .cu3 {
+        background-color: #0d9f0d;
+
+    }
+
+    #animesI {
+        width: 7%;
+        height: 4%;
+    }
+
+    #seriesS {
+        width: 8%;
+        height: 5%;
+    }
+
+    #gamesT {
+        width: 8%;
+        height: 5%;
+    }
+
+    .link {
+        text-decoration: none;
+        color: white;
+    }
+
+    .link:hover {
+        color: rgb(221, 216, 216);
+    }
+
+    @media (max-width:1100px) {
+        .d-block {
+            height: 30rem;
+        }
+    }
+    @media (max-width:850px) {
+        .d-block {
+            height: 23rem;
+        }
+        .content{
+            font-size: 0.7rem;
+        }
+        .card-title{
+            font-size: 1.7rem;
+        }
+        .descG{
+            font-size: 0.7rem;
+        }
+    }
+    @media (max-width:690px) {
+        .card-title{
+            font-size: 0.8rem;
+        }
+        .descG{
+            font-size: 0.7rem;
+        }
+    }
+    @media (max-width:600px) {
+        .d-block {
+            height: 18rem;
+        }
+        .card-title{
+            font-size: 0.8rem;
+        }
+        .descG{
+            font-size: 0.7rem;
+        }
+        
+    }
+    @media (max-width:500px) {
+        .d-block {
+            height: 14rem;
+        }
+        .card-title{
+            font-size: 0.8rem;
+        }
+        .descG{
+            font-size: 0.7rem;
+        }
+    }
+</style>
+{%endblock%}
+{%block body%}
+{%load static%}
+<div class="container my-4">
+    <h1 style="text-align: center; color: white;padding-top:2%;">Welcome to a place where you can add or check reviews
+        for any Series, Animes or
+        Games!</h1>
+    <div class="cu1">
+
+        <h2 class="headings" id="serieshead"><img src="/static/squid.png" alt="" id="seriesS"> <a class="link"
+                href="/series/"> WEB-SERIES</a></h2>
+        <hr id="line1">
+        <div id="carouselExampleCaptions" class="carousel slide c1" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                {%for i in rangeS%}
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{i}}"
+                    aria-label="Slide {{i}}"></button>
+                {%endfor%}
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active text-white  bg-dark">
+                    <img src="/media/{{series.0.series_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
+                    <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
+                        <h1 class="card-title my-2">{{series.0.series_name}}</h1>
+                        <p class="my-1">Rating: {{series.0.rating}}/10<i class="bi bi-star-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
+                                    class="bi bi-star-fill" viewBox="0 1 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </i></p>
+                        <p>{{series.0.desc|slice:"0:183"}}...</p>
+                    </div>
+                </div>
+                {%for j in series|slice:"1:"%}
+                <div class="carousel-item  bg-dark">
+                    <img src="/media/{{j.series_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
+                    <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
+                        <h1 class="card-title my-2">{{j.series_name}}</h1>
+                        <h5>Rating: {{j.rating}}/10<i class="bi bi-star-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
+                                    class="bi bi-star-fill" viewBox="0 1 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </i></h5>
+                        <p>{{j.desc|slice:"0:183"}}...</p>
+                    </div>
+                </div>
+                {%endfor%}
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="cu1 cu2">
+
+        <h2 class="headings" id="animeshead"><img src="/static/kaka.png" alt="" id="animesI"> <a href="/animes/"
+                class="link"> ANIMES </a></h2>
+        <hr id="line2">
+        <div id="carouselExampleCaptions2" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 0"></button>
+                {%for countanime in rangeA%}
+                <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="{{countanime}}"
+                    aria-label="Slide {{countanime}}"></button>
+                {%endfor%}
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-dark">
+                    <img src="/media/{{animes.0.anime_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
+                    <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
+                        <h1 class="card-title">{{animes.0.anime_name}}</h1>
+                        <h5>{{animes.0.rating}}/10<i class="bi bi-star-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
+                                    class="bi bi-star-fill" viewBox="0 1 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </i></h5>
+                        <p>{{animes.0.desc|slice:"0:183"}}...</p>
+                    </div>
+                </div>
+                {%for anime in animes|slice:"1:"%}
+                <div class="carousel-item bg-dark">
+                    <img src="/media/{{anime.anime_img}}" class="d-block w-100" alt="..." style="opacity: 0.7;">
+                    <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
+                        <h1 class="card-title">{{anime.anime_name}}</h1>
+                        <h5>{{anime.rating}}/10<i class="bi bi-star-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
+                                    class="bi bi-star-fill" viewBox="0 1 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </i></h5>
+                        <p>{{anime.desc|slice:"0:183"}}...</p>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions2"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions2"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="cu1 cu3">
+
+        <h2 class="headings" id="gameshead"> <img src="/static/Ezio.png" alt="" id="gamesT"> <a href="/games/"
+                class="link"> GAMES </a></h2>
+        <hr id="line3">
+        <div id="carouselExampleCaptions3" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions3" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+
+                {%for k in rangeG%}
+                <button type="buttson" data-bs-target="#carouselExampleCaptions3" data-bs-slide-to="{{k}}"
+                    aria-label="Slide {{k}}"></button>
+                {%endfor%}
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-dark">
+                    <img src="/media/{{games.0.game_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
+                    <div class="carousel-caption content d-none d-md-block">
+                        <h1 class="card-title">{{games.0.game_name}}</h1>
+                        <h5>{{games.0.rating}}/10<i class="bi bi-star-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
+                                    class="bi bi-star-fill" viewBox="0 1 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </i></h5>
+                        <p class="descG">{{games.0.desc|slice:"0:183"}}...</p>
+                    </div>
+                </div>
+                {% for g in games|slice:"1:"%}
+                <div class="carousel-item bg-dark">
+                    <img src="/media/{{g.game_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="card-title">{{g.game_name}}</h1>
+                        <h5>{{g.rating}}/10<i class="bi bi-star-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
+                                    class="bi bi-star-fill" viewBox="0 1 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </i></h5>
+                        <p class="descG">{{g.desc|slice:"0:183"}}...</p>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions3"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions3"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+{%endblock%}

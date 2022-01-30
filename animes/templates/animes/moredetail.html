@@ -1,0 +1,36 @@
+{% extends "animes/basic.html"%}
+{%block title %} {{animes.anime_name}} {%endblock%}
+{%block body %}
+<style>
+    .card-body {
+        width: 60%;
+    }
+    .success{
+        display: none;
+        margin: auto;
+        width: 70%;
+    }
+</style>
+
+    <div class="card mb-3" style="align-items: center;">
+        <img src="/media/{{animes.anime_img}}" class="card-img-top my-3" alt="..." style="width:auto ;max-height: 40rem; max-width: 60%;">
+        <div class="card-body">
+            <h1 class="card-title">{{animes.anime_name}}</h1>
+            <p class="card-text">{{animes.desc}}.</p>
+            <p class="card-text">Release Date: {{animes.release_date}}</p>
+            <p class="card-text">Rating: {{rating}}/10 <i class="bi bi-star-fill">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="27" fill="orange" class="bi bi-star-fill" viewBox="0 2.5 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+            </i>({{count}})</p></p> 
+    </div>
+</div>
+
+
+{%endblock%}
+{%block script%}
+<script>
+      
+
+</script>
+{%endblock%}
