@@ -30,6 +30,7 @@ def index(request):
 
 
 def contact(request):
+    glist = gamesrev.objects.all()
     if request.method == "POST":
         print(request)
         name = request.POST.get("username", '')
@@ -42,10 +43,11 @@ def contact(request):
         sent = True
         return render(request, "games/contact.html", {"sent": sent})
 
-    return render(request, "games/contact.html")
+    return render(request, "games/contact.html",{"glist":glist})
 
 
 def myreview(request,games_id):
+    glist = gamesrev.objects.all()
     Games=gamesrev.objects.filter(games_id=games_id)
     if request.method=="POST":
         print(request)
@@ -58,14 +60,16 @@ def myreview(request,games_id):
         mrev.save()
         posted=True
         return render(request,"games/myrev.html",{'games':Games[0],'posted':posted})
-    return render(request, "games/myrev.html",{'games':Games[0]})
+    return render(request, "games/myrev.html",{'games':Games[0],"glist":glist})
 
 
 def about(request):
-    return render(request, "games/aboutgame.html")
+    glist = gamesrev.objects.all()
+    return render(request, "games/aboutgame.html",{"glist":glist})
 
 
 def addrev(request):
+    glist = gamesrev.objects.all()
     if request.method == "POST":
         print(request)
         email = request.POST.get('email', '')
@@ -82,9 +86,10 @@ def addrev(request):
         posted = True
         return render(request, "games/Addrev.html", {"posted": posted})
 
-    return render(request, "games/Addrev.html")
+    return render(request, "games/Addrev.html",{"glist":glist})
 
 def detail(request,games_id):
+    glist=gamesrev.objects.all()
     Games=gamesrev.objects.filter(games_id=games_id)
     myrevdistinct=myrev.objects.filter(game_name=Games[0].game_name)
     rate=Games[0].rating
@@ -92,4 +97,4 @@ def detail(request,games_id):
         rate+=i.rating
     rate=rate/(len(myrevdistinct)+1)
     rate=round(rate,1)
-    return render(request,"games/moredetail.html",{"games":Games[0],'rating':rate,'count':(len(myrevdistinct)+1)})
+    return render(request,"games/moredetail.html",{"games":Games[0],'rating':rate,'count':(len(myrevdistinct)+1),"glist":glist})

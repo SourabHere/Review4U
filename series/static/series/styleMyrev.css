@@ -1,0 +1,62 @@
+.card-body {
+    width: 60%;
+}
+
+.success {
+    display: none;
+    margin: auto;
+    width: 70%;
+}
+
+.linkimg:hover {
+    opacity: 0.9;
+}
+
+.cardrecc {
+    width: 100%;
+    /* height: 4rem; */
+}
+
+.poptitle {
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+.popcbody {
+    align-items: center;
+    text-align: left;
+    padding: 0;
+    padding-left: 5%;
+}
+
+.poparea {
+    height: 3.5rem;
+    align-items: center;
+}
+
+.popimage {
+    height: 3.5rem;
+    max-width: 5rem;
+    /* max-width: 100%; */
+}
+
+.popimgarea {
+    text-align: start;
+    background-size: cover;
+    width: auto;
+    /* width: fit-content; */
+}
+
+.popover {
+    width: 20rem;
+}
+
+.more2 {
+    text-decoration: none;
+    color: black;
+}
+
+.more2:hover {
+    color: rgb(43, 41, 41);
+    border-bottom: 2px solid rgb(43, 41, 41);
+}

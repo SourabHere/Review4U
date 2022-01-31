@@ -45,6 +45,7 @@ def index(request):
     # return HttpResponse("hello")
 
 def contact(request):
+    slist=seriesrev.objects.all()
     if request.method=="POST":
         print(request)
         username=request.POST.get('username','')
@@ -56,9 +57,10 @@ def contact(request):
         contacts.save()
         sent=True
         return render(request,"series/Contact.html",{'sent':sent})
-    return render(request,"series/Contact.html")
+    return render(request,"series/Contact.html",{"slist":slist})
 
 def addrev(request):
+    slist=seriesrev.objects.all()
     if request.method=="POST":
         print(request)
         email=request.POST.get('email','')
@@ -73,10 +75,12 @@ def addrev(request):
         id=series.series_id
         posted=True
         return render(request,"series/AddRev.html",{"posted":posted})      
-    return render(request,"series/AddRev.html")    
+    return render(request,"series/AddRev.html",{"slist":slist})    
 def about(request):
-    return render(request,"series/about.html")   
+    slist=seriesrev.objects.all()
+    return render(request,"series/about.html",{"slist":slist})   
 def myreview(request,series_id):
+    slist=seriesrev.objects.all()
     Series=seriesrev.objects.filter(series_id=series_id)
     if request.method=="POST":
         print(request)
@@ -89,9 +93,10 @@ def myreview(request,series_id):
         mrev.save()
         posted=True
         return render(request,"series/myreview.html",{'series':Series[0],'posted':posted})
-    return render(request,"series/myreview.html",{'series':Series[0]})     
+    return render(request,"series/myreview.html",{'series':Series[0],"slist":slist})     
 
 def moredetail(request,series_id):
+    slist=seriesrev.objects.all()
     Series=seriesrev.objects.filter(series_id=series_id)
     myrevdistinct=myrev.objects.filter(series_name=Series[0].series_name)
     rate=Series[0].rating
@@ -99,4 +104,4 @@ def moredetail(request,series_id):
         rate+=i.rating
     rate=rate/(len(myrevdistinct)+1)
     rate=round(rate,1)
-    return render(request,"series/moredetail.html",{'series':Series[0],'rating':rate,'count':(len(myrevdistinct)+1)})
+    return render(request,"series/moredetail.html",{'series':Series[0],'rating':rate,'count':(len(myrevdistinct)+1),"slist":slist})

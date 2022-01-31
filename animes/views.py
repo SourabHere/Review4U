@@ -31,6 +31,7 @@ def index(request):
     return render(request,"animes/index.html",params)
 
 def Contact(request):
+    alist=animesrev.objects.all()
     if request.method=="POST":
         print(request)
         name=request.POST.get('username','')
@@ -42,9 +43,10 @@ def Contact(request):
         allcontact=contact(name=name,email=email,desc=desc,phone=phone)
         allcontact.save()
         return render(request,"animes/contact.html",{'posted':posted})
-    return render(request,"animes/contact.html")
+    return render(request,"animes/contact.html",{"alist":alist})
 
 def addrev(request):
+    alist=animesrev.objects.all()
     if request.method=="POST":
         print(request)
         email=request.POST.get('email','')
@@ -59,9 +61,10 @@ def addrev(request):
         addedrev=animesrev(email=email,anime_name=anime_name,release_date=release_date,desc=desc,anime_img=anime_img,rating=rating)
         addedrev.save()
         return render(request,"animes/addrev.html",{'posted':posted})
-    return render(request,"animes/addrev.html")
+    return render(request,"animes/addrev.html",{"alist":alist})
 
 def myreview(request,anime_id):
+    alist=animesrev.objects.all()
     Animes=animesrev.objects.filter(anime_id=anime_id)
     if request.method=="POST":
         print(request)
@@ -74,12 +77,14 @@ def myreview(request,anime_id):
         mrev.save()
         posted=True
         return render(request,"animes/myrev.html",{'animes':Animes[0],'posted':posted})
-    return render(request,"animes/myrev.html",{'animes':Animes[0]})
+    return render(request,"animes/myrev.html",{'animes':Animes[0],"alist":alist})
 
 def about(request):
-    return render(request,"animes/about.html")
+    alist=animesrev.objects.all()
+    return render(request,"animes/about.html",{"alist":alist})
 
 def moredetail(request,anime_id):
+    alist=animesrev.objects.all()
     Animes=animesrev.objects.filter(anime_id=anime_id)
     myrevdist=Myrev.objects.filter(anime_name=Animes[0].anime_name)
     rate=Animes[0].rating
@@ -87,4 +92,4 @@ def moredetail(request,anime_id):
         rate+=i.rating
     rate=rate/(len(myrevdist)+1)
     rate=round(rate,1)
-    return render(request,"animes/moredetail.html",{'animes':Animes[0],'rating':rate,'count':len(myrevdist)+1})
+    return render(request,"animes/moredetail.html",{'animes':Animes[0],'rating':rate,'count':len(myrevdist)+1,'alist':alist})

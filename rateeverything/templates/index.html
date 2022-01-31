@@ -93,62 +93,180 @@
         color: rgb(221, 216, 216);
     }
 
+    
+
     @media (max-width:1100px) {
         .d-block {
             height: 30rem;
         }
     }
+
     @media (max-width:850px) {
         .d-block {
             height: 23rem;
         }
-        .content{
+
+        .content {
             font-size: 0.7rem;
+            height: 10rem;
         }
-        .card-title{
+
+        .card-title {
             font-size: 1.7rem;
         }
-        .descG{
+
+        .descG {
             font-size: 0.7rem;
         }
     }
+
     @media (max-width:690px) {
-        .card-title{
-            font-size: 0.8rem;
+        .card-title {
+            font-size: 1rem;
         }
-        .descG{
+
+        .descG {
             font-size: 0.7rem;
         }
+        .rate {
+            font-size: 0.7rem;
+        }
+        .headings{
+            font-size: 1rem;
+        }
+        .top{
+            font-size: 1.4rem;
+        }
+        svg{
+            height: 15px;
+            width: 15px;
+        }
     }
+
     @media (max-width:600px) {
         .d-block {
             height: 18rem;
         }
-        .card-title{
+
+        .card-title {
             font-size: 0.8rem;
         }
-        .descG{
+
+        .descG {
             font-size: 0.7rem;
         }
-        
+        .rate {
+            font-size: 0.7rem;
+        }
+        .top{
+            font-size: 1rem;
+        }
+        svg{
+            height: 13px;
+            width: 13px;
+        }
     }
+
     @media (max-width:500px) {
         .d-block {
             height: 14rem;
         }
-        .card-title{
+
+        .card-title {
             font-size: 0.8rem;
         }
-        .descG{
+
+        .descG {
+            font-size: 0.5rem;
+        }
+
+        .rate {
+            font-size: 0.7rem;
+        }
+        .headings{
+            font-size: 0.8rem;
+        }
+        .content{
+            height: 7.5rem;
+            font-size: 0.5rem;
+        }
+        svg{
+            height: 12px;
+            width: 12px;
+        }
+        .carousel-indicators [data-bs-target] {
+            width: 10px;
+            height: 1px;
+            margin-right: 1.5px;
+            margin-left: 1.5px;
+        }
+    }
+    @media (max-width:425px) {
+        .d-block {
+            height: 12rem;
+        }
+        .headings{
             font-size: 0.65rem;
         }
+        .content{
+            height: 6.5rem;
+            font-size: 0.35rem;
+        }
+        .rate {
+            font-size: 0.5rem;
+        }
+        .top{
+            font-size: 0.7rem;
+        }
+        .descG {
+            font-size: 0.35rem;
+        }
+        svg{
+            height: 10px;
+            width: 10px;
+        }
+    }
+    @media (max-width:300px) {
+        .d-block {
+            height: 8rem;
+        }
+        .headings{
+            font-size: 0.5rem;
+        }
+        .content{
+            font-size: 0.3rem;
+        }
+        .rate {
+            font-size: 0.4rem;
+        }
+        .top{
+            font-size: 0.5rem;
+        }
+        .descG {
+            font-size: 0.3rem;
+        }
+        .carousel-indicators [data-bs-target] {
+            width: 6px;
+            margin-right: 1px;
+            margin-left: 1px;
+            /* margin-bottom: 1px; */
+            height: 0.8px; 
+        } 
+        .card-title{
+            font-size: 0.6rem;
+        }
+        svg{
+            height: 7px;
+            width: 7px;
+        }
+        
     }
 </style>
 {%endblock%}
 {%block body%}
 {%load static%}
 <div class="container my-4">
-    <h1 style="text-align: center; color: white;padding-top:2%;">Welcome to a place where you can add or check reviews
+    <h1 class="top" style="text-align: center; color: white;padding-top:2%;">Welcome to a place where you can add or check reviews
         for any Series, Animes or
         Games!</h1>
     <div class="cu1">
@@ -170,14 +288,14 @@
                     <img src="/media/{{series.0.series_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
                     <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
                         <h1 class="card-title my-2">{{series.0.series_name}}</h1>
-                        <p class="my-1">Rating: {{series.0.rating}}/10<i class="bi bi-star-fill">
+                        <p class="my-1 rate">{{series.0.rating}}/10<i class="bi bi-star-fill">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
                                     class="bi bi-star-fill" viewBox="0 1 16 16">
                                     <path
                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                 </svg>
                             </i></p>
-                        <p>{{series.0.desc|slice:"0:183"}}...</p>
+                        <p>{{series.0.desc|slice:"0:143"}}...</p>
                     </div>
                 </div>
                 {%for j in series|slice:"1:"%}
@@ -185,14 +303,14 @@
                     <img src="/media/{{j.series_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
                     <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
                         <h1 class="card-title my-2">{{j.series_name}}</h1>
-                        <h5>Rating: {{j.rating}}/10<i class="bi bi-star-fill">
+                        <h5 class="rate">{{j.rating}}/10<i class="bi bi-star-fill">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
                                     class="bi bi-star-fill" viewBox="0 1 16 16">
                                     <path
                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                 </svg>
                             </i></h5>
-                        <p>{{j.desc|slice:"0:183"}}...</p>
+                        <p>{{j.desc|slice:"0:143"}}...</p>
                     </div>
                 </div>
                 {%endfor%}
@@ -230,14 +348,14 @@
                     <img src="/media/{{animes.0.anime_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
                     <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
                         <h1 class="card-title">{{animes.0.anime_name}}</h1>
-                        <h5>{{animes.0.rating}}/10<i class="bi bi-star-fill">
+                        <h5 class="rate">{{animes.0.rating}}/10<i class="bi bi-star-fill">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
                                     class="bi bi-star-fill" viewBox="0 1 16 16">
                                     <path
                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                 </svg>
                             </i></h5>
-                        <p>{{animes.0.desc|slice:"0:183"}}...</p>
+                        <p>{{animes.0.desc|slice:"0:143"}}...</p>
                     </div>
                 </div>
                 {%for anime in animes|slice:"1:"%}
@@ -245,14 +363,14 @@
                     <img src="/media/{{anime.anime_img}}" class="d-block w-100" alt="..." style="opacity: 0.7;">
                     <div class="carousel-caption py-4  my-4 content" style="text-align: center;">
                         <h1 class="card-title">{{anime.anime_name}}</h1>
-                        <h5>{{anime.rating}}/10<i class="bi bi-star-fill">
+                        <h5 class="rate">{{anime.rating}}/10<i class="bi bi-star-fill">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
                                     class="bi bi-star-fill" viewBox="0 1 16 16">
                                     <path
                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                 </svg>
                             </i></h5>
-                        <p>{{anime.desc|slice:"0:183"}}...</p>
+                        <p>{{anime.desc|slice:"0:143"}}...</p>
                     </div>
                 </div>
                 {%endfor%}
@@ -288,31 +406,31 @@
             <div class="carousel-inner">
                 <div class="carousel-item active bg-dark">
                     <img src="/media/{{games.0.game_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
-                    <div class="carousel-caption content d-none d-md-block">
+                    <div class="carousel-caption content  py-4  my-4">
                         <h1 class="card-title">{{games.0.game_name}}</h1>
-                        <h5>{{games.0.rating}}/10<i class="bi bi-star-fill">
+                        <h5 class="rate">{{games.0.rating}}/10<i class="bi bi-star-fill">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
                                     class="bi bi-star-fill" viewBox="0 1 16 16">
                                     <path
                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                 </svg>
                             </i></h5>
-                        <p class="descG">{{games.0.desc|slice:"0:183"}}...</p>
+                        <p class="descG">{{games.0.desc|slice:"0:143"}}...</p>
                     </div>
                 </div>
                 {% for g in games|slice:"1:"%}
                 <div class="carousel-item bg-dark">
                     <img src="/media/{{g.game_img}}" class="d-block w-100" alt="..." style="opacity: 0.6;">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption  py-4  my-4 content">
                         <h1 class="card-title">{{g.game_name}}</h1>
-                        <h5>{{g.rating}}/10<i class="bi bi-star-fill">
+                        <h5 class="rate">{{g.rating}}/10<i class="bi bi-star-fill">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange"
                                     class="bi bi-star-fill" viewBox="0 1 16 16">
                                     <path
                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                 </svg>
                             </i></h5>
-                        <p class="descG">{{g.desc|slice:"0:183"}}...</p>
+                        <p class="descG">{{g.desc|slice:"0:143"}}...</p>
                     </div>
                 </div>
                 {%endfor%}

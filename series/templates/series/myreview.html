@@ -1,45 +1,39 @@
 {% extends 'series/basic.html'%}
 {%block title %} {{series.series_name}} {%endblock%}
 {%block body %}
-<style>
-    .card-body {
-        width: 60%;
-    }
-    .success{
-        display: none;
-        margin: auto;
-        width: 70%;
-    }
-</style>
+{%load static%}
+<link rel="stylesheet" href="{% static 'series/styleMyrev.css' %}">
 
-    <div class="card mb-3" style="align-items: center;">
-        <img src="/media/{{series.series_img}}" class="card-img-top my-3" alt="..." style="width:auto ;max-height: 40rem; max-width: 60%;">
-        <div class="card-body">
-            <h1 class="card-title">{{series.series_name}}</h1>
-            <p class="card-text">{{series.desc}}.</p>
-            <p class="card-text">Release Date: {{series.release_date}}</p>
-            <form action="/series/myreview/{{series.series_id}}" method="post">{% csrf_token %}
-                <input type="hidden" name="series_name" value="{{series.series_name}}">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name</label>
-                    <input type="name" class="form-control" id="exampleInputEmail1" name="name"
+<div class="card mb-3" style="align-items: center;">
+    <img src="/media/{{series.series_img}}" class="card-img-top my-3" alt="..."
+        style="width:auto ;max-height: 40rem; max-width: 60%;">
+    <div class="card-body">
+        <h1 class="card-title">{{series.series_name}}</h1>
+        <p class="card-text">{{series.desc}}.</p>
+        <p class="card-text">Release Date: {{series.release_date}}</p>
+        <form action="/series/myreview/{{series.series_id}}" method="post">{% csrf_token %}
+            <input type="hidden" name="series_name" value="{{series.series_name}}">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="name" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email"
                     aria-describedby="emailHelp" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                    aria-describedby="emailHelp" required>
-                </div>
-                <div class="mb-3">
+            </div>
+            <div class="mb-3">
                 <label for="customRange2" class="form-label">Your Rating</label>
                 <input type="range" class="form-range" min="0" max="10" id="customRange2" name="rating" required>
             </div>
-            <button type="submit" class="btn btn-primary" style="background-color: rgb(233 19 19);border: 2px rgb(233 19 19);">Submit</button>
+            <button type="submit" class="btn btn-primary"
+                style="background-color: rgb(233 19 19);border: 2px rgb(233 19 19);">Submit</button>
         </form>
     </div>
 </div>
 
-<div class="success my-3" >
+<div class="success my-3">
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Success!!</h4>
         <p>Your review has been uploaded successfully.</p>
@@ -47,21 +41,87 @@
         <p>Thank you for your reviews.</p>
         <div class="spinner-grow my-3" role="status">
             <span class="visually-hidden ">Loading...</span>
-          </div>
+        </div>
     </div>
 </div>
 {%endblock%}
 {%block js%}
 <script>
-    
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    });
+
     function redirect() {
-        document.location="/series"
+        document.location = "/series"
     }
     {% if posted %}
-    document.querySelector(".card").style.display='none';
-    document.querySelector(".success").style.display='block';
-    setTimeout(redirect,1500);
-    {%endif%}
+    document.querySelector(".card").style.display = 'none';
+    document.querySelector(".success").style.display = 'block';
+    setTimeout(redirect, 1500);
+    {% endif %}
 
+    var popstr = "";
+
+    let search = document.getElementById('search1');
+    let searchbtn = document.getElementById('searchbtn');
+    {%for i in slist %}
+    // console.log(`{{i.series_name}}`);
+    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" style="width:auto;">
+            <div class="row g-0 content{{forloop.counter0}} poparea">
+                <div class="col-md-4 popimgarea">
+                    <a href="/series/moredetail/{{i.series_id}}" class="linkimg"><img src="/media/{{i.series_img}}" class="img-fluid rounded-start popimage" alt="..."></a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body popcbody" >
+                            <a href="/series/moredetail/{{i.series_id}}" class="more2"><h5 class="card-title card{{forloop.counter0}} poptitle" >{{i.series_name}}</h5></a>
+                            </div>
+                            </div>
+                            </div>
+                            </div>`;
+
+
+    {% endfor %}
+
+    search.setAttribute('data-bs-content', popstr);
+    console.log(popstr);
+
+    search.addEventListener("input", function () {
+        let searchval = search.value.toLowerCase();
+        console.log(searchval);
+
+        $('#search1').popover('show');
+
+        if (searchval == '') {
+            // console.log("here");
+            $('#search1').popover('hide');
+
+        }
+        else {
+            // console.log("not here");
+            $('#search1').popover('show');
+        }
+
+        let searchpop = document.getElementsByClassName("cardrecc");
+        let count = 0;
+        Array.from(searchpop).forEach(element => {
+
+            let cardn = document.querySelector(`.card${count}`);
+            let box = document.querySelector(`.box${count}`);
+
+            let Serieshere = cardn.textContent;
+            Serieshere = Serieshere.toLowerCase();
+
+
+            if (Serieshere == searchval || Serieshere.slice(0, searchval.length) == searchval) {
+                box.style.display = "";
+            }
+            else {
+                box.style.display = "none";
+            }
+
+            count++;
+        })
+    })
 </script>
 {%endblock%}

@@ -1,28 +1,8 @@
 {% extends 'games/basic.html'%}
 {%block title%} Add rev {%endblock%}
 {%block css%}
-<style>
-    .container {
-        /* border:2px solid black; */
-        width: 70%;
-    }
-
-    .reld {
-        width: auto;
-    }
-
-    .img {
-        width: auto;
-    }
-    .head{
-        text-align: center;
-    }
-    .success{
-        display: none;
-        margin: auto;
-        width: 70%;
-    }
-</style>
+{%load static%}
+<link rel="stylesheet" href="{% static 'games/styleAdd.css' %}">
 {%endblock%}
 {%block body%}
 <script>
@@ -76,6 +56,13 @@
 {%block script%}
 <script>
     // console.log("hello");
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    });
+
+    var popstr = "";
+    
     function redirect() {
         document.location="/games"
     }
@@ -86,5 +73,63 @@
     setTimeout(redirect,1500);
     {%endif%}
 
+    let search = document.getElementById('search1');
+    let searchbtn = document.getElementById('searchbtn');
+    {%for i in glist%}
+    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" style="width:auto;">
+                <div class="row g-0 content{{forloop.counter0}} poparea">
+                    <div class="col-md-4 popimgarea">
+                        <a href="/games/moredetail/{{i.games_id}}" class="linkimg"><img src="/media/{{i.game_img}}" class="img-fluid rounded-start popimage" alt="..."></a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body popcbody" >
+                                <a href="/games/moredetail/{{i.games_id}}" class="more2"><h5 class="card-title card{{forloop.counter0}} poptitle" >{{i.game_name}}</h5></a>
+                                </div>
+                                </div>
+                                </div>
+                                </div>`;
+            
+
+    {%endfor%}
+    search.setAttribute('data-bs-content', popstr);
+    console.log(popstr);
+
+    search.addEventListener("input", function () {
+        let searchval = search.value.toLowerCase();
+        console.log(searchval);
+
+        $('#search1').popover('show');
+
+        if (searchval == '') {
+            // console.log("here");
+            $('#search1').popover('hide');
+
+        }
+        else {
+            // console.log("not here");
+            $('#search1').popover('show');
+        }
+
+        let searchpop = document.getElementsByClassName("cardrecc");
+        let count = 0;
+        Array.from(searchpop).forEach(element => {
+
+            let cardn = document.querySelector(`.card${count}`);
+            let box = document.querySelector(`.box${count}`);
+
+            let Serieshere = cardn.textContent;
+            Serieshere = Serieshere.toLowerCase();
+
+
+            if (Serieshere == searchval || Serieshere.slice(0, searchval.length) == searchval) {
+                box.style.display = "";
+            }
+            else {
+                box.style.display = "none";
+            }
+
+            count++;
+        })
+    })
 </script>
 {%endblock%}
