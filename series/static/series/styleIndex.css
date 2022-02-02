@@ -155,6 +155,23 @@
     .card {
         width: 25rem;
     }
+    #cardrecc{
+        width: 100%;
+    }
+    #poptext{
+        /* width: auto; */
+        width: 60%;
+    }
+    .cardrecc{
+        width: 100%;
+    }
+    .poprecc{
+        width: 60%;
+    }
+    #poptext{
+        /* width: auto; */
+        width: 60%;
+    }
 }
 
 @media(max-width:450px) {
@@ -165,6 +182,10 @@
     .imgs {
         height: 7.1rem;
         max-width: 14rem;
+    }
+    #poptext{
+        /* width: auto; */
+        width: 60%;
     }
 }
 

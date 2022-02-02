@@ -67,13 +67,19 @@ body::before{
         z-index: -2;
         opacity: 0.4;
     }
-
- @media (max-width:700px) {
+#cardrecc{
+    width: 100%;
+}
+@media (max-width:700px) {
     .card-title{
         font-size: 1.3rem;
     }
     .card-text{
         font-size: 0.85rem;
+    }
+    #poptitle {
+        font-size: 0.7rem;
+        margin: 0;
     }
 }
 @media (max-width:350px) {
@@ -82,5 +88,9 @@ body::before{
     }
     .card-text{
         font-size: 0.7rem;
+    }
+    #poptitle {
+        font-size: 0.7rem;
+        margin: 0;
     }
 }

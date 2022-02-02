@@ -53,7 +53,9 @@
     color: rgb(43, 41, 41);
     border-bottom: 2px solid rgb(43, 41, 41);
 }
-
+#cardrecc{
+    width: 100%;
+}
 @media (max-width:700px) {
     .card-title{
         font-size: 1.3rem;
@@ -61,7 +63,10 @@
     .card-text{
         font-size: 0.85rem;
     }
-    
+    #poptitle {
+        font-size: 0.7rem;
+        margin: 0;
+    }
 }
 @media (max-width:350px) {
     .card-title{

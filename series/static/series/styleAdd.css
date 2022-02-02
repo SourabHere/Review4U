@@ -70,6 +70,13 @@
     color: rgb(43, 41, 41);
     border-bottom: 2px solid rgb(43, 41, 41);
 }
+#poptext{
+    width: 60%;
+}
+#cardrecc{
+    width: 100%;
+}
+
 @media (max-width:400px) {
     .img{
         width: 100%;

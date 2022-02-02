@@ -16,6 +16,7 @@
 
 .poptitle {
     font-size: 0.7rem;
+    /* width: 9rem; */
     margin: 0;
 }
 
@@ -24,6 +25,7 @@
     text-align: left;
     padding: 0;
     padding-left: 5%;
+    width: auto;
 }
 
 .poparea {
@@ -56,4 +58,7 @@
 .more2:hover {
     color: rgb(43, 41, 41);
     border-bottom: 2px solid rgb(43, 41, 41);
+}
+#poptext{
+    width: auto;
 }

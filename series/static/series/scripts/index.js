@@ -33,12 +33,12 @@ function updatePopover() {
         // console.log("yahooo");
         // console.log(Aname);
 
-        popstr = popstr + `<div class="card mb-3 cardrecc box${count}" style="width:auto;">
+        popstr = popstr + `<div class="card mb-3 cardrecc box${count}" id="cardrecc" style="width:auto;">
             <div class="row g-0 content${count} poparea">
                 <div class="col-md-4 popimgarea">
                     <a href="${detail.getAttribute("href")}" class="linkimg"><img src="${Seriesimg.getAttribute("src")}" class="img-fluid rounded-start popimage" alt="..."></a>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" id="poptext">
                         <div class="card-body popcbody" >
                             <a href="${detail.getAttribute("href")}" class="more2"><h5 class="card-title card${count} poptitle" >${originnalname}</h5></a>
                             </div>

@@ -4,6 +4,14 @@
 {%block css%}
 {%load static%}
 <link rel="stylesheet" href="{% static 'series/styleabout.css' %}"> 
+<style>
+    @media (max-width:800px) {
+        #poptext {
+            /* width: auto; */
+            width: 60%;
+        }
+    }
+</style>
 {%endblock%}
 
 
@@ -38,14 +46,14 @@
     let searchbtn = document.getElementById('searchbtn');
     {%for i in slist%}
     // console.log(`{{i.series_name}}`);
-    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" style="width:auto;">
+    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" id="cardrecc" style="width:auto;">
                 <div class="row g-0 content{{forloop.counter0}} poparea">
                     <div class="col-md-4 popimgarea">
                         <a href="/series/moredetail/{{i.series_id}}" class="linkimg"><img src="/media/{{i.series_img}}" class="img-fluid rounded-start popimage" alt="..."></a>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8" id="poptext">
                             <div class="card-body popcbody" >
-                                <a href="/series/moredetail/{{i.series_id}}" class="more2"><h5 class="card-title card{{forloop.counter0}} poptitle" >{{i.series_name}}</h5></a>
+                                <a href="/series/moredetail/{{i.series_id}}" class="more2"><h5 class="card{{forloop.counter0}} poptitle" id="poptitle" >{{i.series_name}}</h5></a>
                                 </div>
                                 </div>
                                 </div>

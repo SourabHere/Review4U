@@ -3,6 +3,14 @@
 {%block css%}
 {%load static%}
 <link rel="stylesheet" href="{% static 'games/styleAdd.css' %}">
+<style>
+    @media (max-width:800px) {
+        #poptext {
+            /* width: auto; */
+            width: 60%;
+        }
+    }
+</style>
 {%endblock%}
 {%block body%}
 <script>
@@ -10,46 +18,49 @@
     add = document.querySelector(".add");
     home.classList.remove("active");
     add.classList.add("active");
-  </script>
+</script>
 <h2 class="head my-2">Add review</h2>
 <div class="container">
-<form action="/games/addrev/" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <form action="/games/addrev/" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label" >Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" required>
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"
+                required>
         </div>
         <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label" >Game Name</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" name="game_name" placeholder="Example:Assassin's Creed" required>
+            <label for="formGroupExampleInput" class="form-label">Game Name</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="game_name"
+                placeholder="Example:Assassin's Creed" required>
         </div>
         <div class="mb-3">
-            <label for="formFile" class="form-label" >Release date</label>
+            <label for="formFile" class="form-label">Release date</label>
             <input class="form-control reld" type="date" name="rel_date" id="formFile" required>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label" >Description</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc" required></textarea>
         </div>
 
         <div class="mb-3">
-            <label for="formFile" class="form-label" >Image</label>
-            <input class="form-control img" type="file" id="formFile" name="img" required> 
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control img" type="file" id="formFile" name="img" required>
         </div>
         <div class="mb-3">
-            <label for="customRange2" class="form-label" >Rating</label>
+            <label for="customRange2" class="form-label">Rating</label>
             <input type="range" class="form-range" min="0" max="10" id="customRange2" name="rating" required>
         </div>
-        <button type="submit" class="btn btn-primary" id="submit" style="background-color: #0d9f0d; border:2px #0d9f0d;">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary" id="submit"
+            style="background-color: #0d9f0d; border:2px #0d9f0d;">Submit</button>
+    </form>
 </div>
-<div class="success my-3" >
+<div class="success my-3">
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Success!!</h4>
         <p>Your review has been uploaded successfully.</p>
         <p class="mb-0">You will be redirected to Home shortly.</p>
         <div class="spinner-grow my-3" role="status">
             <span class="visually-hidden ">Loading...</span>
-          </div>
+        </div>
     </div>
 </div>
 {%endblock%}
@@ -62,35 +73,35 @@
     });
 
     var popstr = "";
-    
+
     function redirect() {
-        document.location="/games"
+        document.location = "/games"
     }
     {% if posted %}
-    document.querySelector(".head").style.display='none';
-    document.querySelector(".container").style.display='none';
-    document.querySelector(".success").style.display='block';
-    setTimeout(redirect,1500);
-    {%endif%}
+    document.querySelector(".head").style.display = 'none';
+    document.querySelector(".container").style.display = 'none';
+    document.querySelector(".success").style.display = 'block';
+    setTimeout(redirect, 1500);
+    {% endif %}
 
     let search = document.getElementById('search1');
     let searchbtn = document.getElementById('searchbtn');
-    {%for i in glist%}
-    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" style="width:auto;">
+    {%for i in glist %}
+    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" id="cardrecc" style="width:auto;">
                 <div class="row g-0 content{{forloop.counter0}} poparea">
                     <div class="col-md-4 popimgarea">
                         <a href="/games/moredetail/{{i.games_id}}" class="linkimg"><img src="/media/{{i.game_img}}" class="img-fluid rounded-start popimage" alt="..."></a>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8" id="poptext" style="width: auto;">
                             <div class="card-body popcbody" >
                                 <a href="/games/moredetail/{{i.games_id}}" class="more2"><h5 class="card-title card{{forloop.counter0}} poptitle" >{{i.game_name}}</h5></a>
                                 </div>
                                 </div>
                                 </div>
                                 </div>`;
-            
 
-    {%endfor%}
+
+    {% endfor %}
     search.setAttribute('data-bs-content', popstr);
     console.log(popstr);
 

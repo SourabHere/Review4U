@@ -3,6 +3,23 @@
 {%block body %}
 {%load static%}
 <link rel="stylesheet" href="{% static 'animes/styleMore.css' %}">
+<style>
+    #poptext {
+        width: 60%;
+    }
+
+    #cardrecc {
+        width: 100%;
+    }
+    .popcbody {
+        width: auto;
+    }
+    @media (max-width:800px) {
+    .popcbody {
+        width: auto;
+    }
+}
+</style>
 
     <div class="card mb-3" style="align-items: center;">
         <img src="/media/{{animes.anime_img}}" class="card-img-top my-3" alt="..." style="width:auto ;max-height: 40rem; max-width: 60%;">
@@ -32,12 +49,12 @@
     let search = document.getElementById('search1');
     let searchbtn = document.getElementById('searchbtn');
     {%for i in alist%}
-    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" style="width:auto;">
+    popstr = popstr + `<div class="card mb-3 cardrecc box{{forloop.counter0}}" id="cardrecc" style="width:auto;">
                 <div class="row g-0 content{{forloop.counter0}} poparea">
                     <div class="col-md-4 popimgarea">
                         <a href="/animes/moredetail/{{i.anime_id}}" class="linkimg"><img src="/media/{{i.anime_img}}" class="img-fluid rounded-start popimage" alt="..."></a>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8" id="poptext">
                             <div class="card-body popcbody" >
                                 <a href="/animes/moredetail/{{i.anime_id}}" class="more2"><h5 class="card-title card{{forloop.counter0}} poptitle" >{{i.anime_name}}</h5></a>
                                 </div>

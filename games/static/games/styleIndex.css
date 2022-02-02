@@ -105,12 +105,12 @@
         /* background-color: black; */
         width: 80%;
     }
-
+    
     .imgs {
         height: 20rem;
         max-width: 38rem;
     }
-
+    
     .components {
         justify-content: center;
     }
@@ -120,29 +120,49 @@
     .series {
         width: 65%;
     }
-
+    
     .imgs {
         height: 15rem;
         max-width: 22rem;
     }
-
+    #cardrecc{
+        width: 100%;
+    }
     .card {
         width: 25rem;
     }
+    .popover{
+        max-width: auto;
+    }
+    #poptext{
+        /* width: auto; */
+        width: 60%;
+    }
+    
 }
 
 @media(max-width:450px) {
+    #cardrecc{
+        width: 100%;
+    }
     .card {
         width: 15rem;
     }
-
+    
     .imgs {
         height: 7.1rem;
         max-width: 14rem;
     }
+    #poptext{
+        /* width: auto; */
+        width: 60%;
+    }
 }
 
 @media(max-width:250px) {
+    #cardrecc{
+        width: 100%;
+    }
     .card {
         width: 8rem;
     }
