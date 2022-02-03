@@ -1,4 +1,13 @@
 # Review4U
+<p align="center">
+  
+<!-- <img src="logo.png" alt="..."> -->
+  <h4 align="center">Rating Website build with Django</h4>
+ 
+</p>
+<p align="center">
+   <a href="https://github.com/SourabHere/Review4U/issues">Report Bug</a>
+  </p>
 
 ## About the project 
 
