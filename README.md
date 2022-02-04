@@ -1,9 +1,9 @@
 # Review4U
 <p align="center">
-  
-<!-- <img src="logo.png" alt="..."> -->
+  <img src="homegif.gif" alt="...">
+</p>
+<p align="center">
   <h4 align="center">Rating Website build with Django</h4>
- 
 </p>
 <p align="center">
    <a href="https://github.com/SourabHere/Review4U/issues">Report Bug</a>
@@ -13,6 +13,10 @@
 
 * Review4U can be used to rate anime,games and webseries.
 * You can check reviews of anime/webseries/games next on your list.
+
+<p align="center">
+  <img src="aboutgif.gif" alt="...">
+</p>
 
 ## Languages used
 
